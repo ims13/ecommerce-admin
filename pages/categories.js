@@ -131,6 +131,5 @@ function Categories({swal}) {
 
 
 export default withSwal(({swal}, ref) =>{
-
     <Categories swal ={swal} />
 });

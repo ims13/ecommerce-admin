@@ -20,7 +20,7 @@ export default async function handle(req, res){
         const {title, description, price, images} = req.body;
         try {
             const productDoc = await Product.create({
-                title, description, price, images,
+                title, description, price, images,category
             });
             res.json(productDoc);
         } catch (error) {
@@ -31,7 +31,7 @@ export default async function handle(req, res){
 
     if(method === 'PUT'){
         const {title, description, price,images, _id} = req.body;
-        await Product.updateOne({_id}, {title, description, price, images});
+        await Product.updateOne({_id}, {title, description, price, images, category,});
         res.json(true);
     }
 
