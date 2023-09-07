@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Spinner from "./Spinner";
 
 import {ReactSortable} from "react-sortablejs";
-import { Result } from "postcss";
+
 
 export default function ProductForm({
      title:existingTitle,
@@ -13,11 +13,13 @@ export default function ProductForm({
      price:existingPrice,
      _id,
      images:existingImages,
+     category: assignedCategory,
     }) {
 
     const [title,setTitle] = useState(existingTitle || '');
     const [description,setDescription] = useState(existingDescription || '');
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState(assignedCategory || '');
+
     const [price,setPrice] = useState(existingPrice || '');
     const [images,setImages] = useState(existingImages || '');
     const [isUploading,setIsUploading] = useState(false);
@@ -86,7 +88,7 @@ export default function ProductForm({
                 <option value=""> Uncategorized</option>
                 {
                     categories.length > 0 && categories.map(c =>{
-                        <option value={c._id} >{c.name}</option>
+                        <option key={c._id} value={c._id}> {c.name} </option>
                     })
                 }
             </select>
@@ -101,11 +103,12 @@ export default function ProductForm({
                 >
 
                 {!!images?.length && images.map(link => (
-                    <div key={link} className="h-24">
+                    <div key={link} className="h-24 bg-white p-4 shadow-sm rounded-sm border border-gray-200">
                         <img src={link} alt="" className="rounded-lg"/>
                     </div>
                 ))}
-                </ReactSortable>
+
+              </ReactSortable>
                 {isUploading &&(
                     <div className="h-24 flex items-center">
                         <Spinner />
